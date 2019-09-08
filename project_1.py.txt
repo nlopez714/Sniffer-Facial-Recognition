@@ -1,0 +1,85 @@
+
+Created on Sat May 11 16:14:03 2019
+
+@author: root
+"""
+
+from scapy.all import *
+import numpy as np
+import pandas as pd
+from matplotlib.pyplot import hist
+import sys
+import cv2
+import socket
+import os
+import struct
+from ctypes import *
+#Nicholas Lopez BFOR 203 Project (Part 1 of 2)
+#%%
+#Sniffs from file images5.pcap
+mailsniff = sniff(offline='vm_share/images5.pcap',
+		          store=True)
+#%%
+#prints the total number of packets in the image file
+#CITATION: https://www.geeksforgeeks.org/python-string-length-len/
+print ('The total number of packets in the network capture is:')
+print (len(mailsniff))
+#%%
+#prints packet types
+Packet_Type_Count=rdpcap("vm_share/images5.pcap")
+Packet_Type_Count
+#%%
+#displays a graph to depict traffic flows
+mailsniff.conversations()
+#%%
+s = mailsniff.sessions()
+print(dict)
+print(len(s))
+#lists the top 5 sessions based on number of packets
+
+list(s.keys())
+s.values()
+topses = {}
+i=1
+
+for key, value in s.items():
+    topses[key]=len(value)
+    
+for k in sorted(topses, key=lambda k :topses[k], reverse=True):
+    if i < 6:
+        print (k, topses[k])
+        i+=1
+    else:
+        break
+#%%
+pkts = sniff(count=50)
+pkts.summary()
+pkts
+
+pkts.conversations()
+
+n = pkts.sessions()
+print(dict)
+n
+
+list(n.keys())
+n.values()
+dictionary = {}
+w=1
+
+for key, value in n.items ():
+    dictionary[key]=len(value)
+
+for k in sorted(dictionary, key=lambda k :dictionary[k], reverse=True):
+    if w < 6:
+        print(k, dictionary[k])
+        w+=1
+    else:
+        break
+#%%
+
+
+
+
+
+    
